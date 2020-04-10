@@ -1,22 +1,22 @@
 $(document).ready(function(){
   // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]の入力値を取得して合計点と平均点を出すロジックを作ります。
   function score_indicate(){
-    // 変数「subject_points」に
-    // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]の配列を代入します。
     let subject_points = [Number($('#national_language').val()),
                           Number($('#english').val()),
                           Number($('#mathematics').val()),
                           Number($('#science').val()),
                           Number($('#society').val())
                           ];
+    // 変数「subject_points」に
+    // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]の配列を代入します。
+
     // 変数「sum」に
     // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]をそれぞれ足します。
     // ヒント! 配列を一つづつ取り出して足していきます。
-    let sum = subject_points[0];
-    sum = sum + subject_points[1];
-    sum = sum + subject_points[2];
-    sum = sum + subject_points[3];
-    sum = sum + subject_points[4];
+     let sum = subject_points.reduce(function(accumulator, currentValue){
+       return accumulator + currentValue;
+     })
+
     // 「合計点：」(class="sum_indicate")に変数「sum」(合計点)を出力させます。
     $("#sum_indicate").text(sum);
     let average = sum / subject_points.length;
@@ -46,8 +46,13 @@ $(document).ready(function(){
     }
   };
   // 平均値を取得し、取得した平均点からランク分け("A", "B", "C", "D")をするロジックを作ります。
-  function get_pass_or_failure(subject_points){
-    // 変数「number」に入力した教科の数を代入します。
+  function get_pass_or_failure(){
+    let subject_points = [Number($('#national_language').val()),
+                          Number($('#english').val()),
+                          Number($('#mathematics').val()),
+                          Number($('#science').val()),
+                          Number($('#society').val())
+                          ];
     let number = subject_points.length;
     // 変数「judge」に"合格"を代入しておきます。
     let judge = "合格";
@@ -60,7 +65,7 @@ $(document).ready(function(){
     return judge;
     // 入力したそれぞれの教科の点数が60点よりも低いと変数「judge」に"不合格"を代入して「judge」を返します。
     // ヒント! 「javascript 点数 合格 不合格 ロジック」で検索してみてください。
-    $("#judge").text(get_pass_or_failure(subuject_points));
+    $("#judge").text(get_pass_or_failure());
   };
   // 最終的なジャッジのロジックを作ります。
   function judgement(){
