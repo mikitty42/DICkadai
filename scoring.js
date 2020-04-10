@@ -48,10 +48,10 @@ $(document).ready(function(){
   // 平均値を取得し、取得した平均点からランク分け("A", "B", "C", "D")をするロジックを作ります。
   function get_pass_or_failure(subject_points){
     // 変数「number」に入力した教科の数を代入します。
-    let number = subject_points;
+    let number = subject_points.length;
     // 変数「judge」に"合格"を代入しておきます。
     let judge = "合格";
-    for(let i = 0; i < number.length;i++){
+    for(let i = 0; i < number;i++){
       if(subject_points[i] < 60){
         judge = "不合格";
         break;
@@ -80,9 +80,11 @@ $(document).ready(function(){
     $("#evaluation").text(get_achievement());
   });
   // 「判定」(class="btn-judge")ボタンを押したら「function et_pass_or_failure()」が出力される処理です。
-  $('#btn-judge').click(function() {
+  $('#btn-judge').click(function(){
+    $('#judge').text(get_pass_or_failure());
   });
   // 「最終ジャッジ」(class="btn-declaration")ボタンを押したら「function judgement()」が出力される処理です。
   $('#btn-declaration').click(function() {
+    $("#declaration").text(judgement());
   });
 });
