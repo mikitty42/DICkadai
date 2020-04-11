@@ -73,8 +73,12 @@ $(document).ready(function(){
     let achievement = get_achievement();
     // 変数「pass_or_failure」に「get_pass_or_failure()の戻り値」を代入します。
     let pass_or_failure = get_pass_or_failure();
+    $('#btn-declaration').click(function(){
+      $("#alert-indicate").remove();
+
     // 「最終ジャッジ」(id="alert-indicate)ボタンを押したら「あなたの成績は${achievement}で${pass_or_failure}です」が出力される処理です。
     $('#declaration').append(`<label id="alert-indicate" class="alert alert-info">あなたの成績は${achievement}で${pass_or_failure}です</label>`);
+    });
   };
   // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]のいずれかの点数が変更された際に「function score_indicate()」を発火させる処理です。
   $('#national_language, #english, #mathematics, #science, #society').change(function() {
@@ -89,10 +93,11 @@ $(document).ready(function(){
     $('#judge').text(get_pass_or_failure());
   });
   // 「最終ジャッジ」(class="btn-declaration")ボタンを押したら「function judgement()」が出力される処理です。
-  $('#btn-declaration').click(function() {
-    $("#declaration").text(judgement());
-  $('#btn-declaration').click(function(){
-    $('#alert-indicate').remove();
+  //$('#btn-declaration').click(function() {
+    //$("#declaration").text(judgement());
+  //$('#btn-declaration').click(function(){
+    //$('#alert-indicate').remove();
+    $('#btn-declaration').click(function(){
+      $('#btn-declaration').text(judgement());
+    });
   });
-  });
-});
